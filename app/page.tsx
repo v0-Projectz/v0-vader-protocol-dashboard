@@ -8,7 +8,7 @@ import { SupportTickets } from "@/components/vader/support-tickets"
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col gap-6" data-testid="dashboard">
+    <div className="flex flex-col gap-5" data-testid="dashboard">
       {/* Kanban Board - Full Width */}
       <KanbanBoard />
       
@@ -16,7 +16,7 @@ export default function DashboardPage() {
       <MyTasks />
       
       {/* Bottom Bento Grid - 3 Columns */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         <ActivityPulse />
         <AssetStorage />
         <SupportTickets />

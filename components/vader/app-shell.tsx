@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import { Sidebar } from "@/components/vader/sidebar"
 import { Header } from "@/components/vader/header"
 import { Footer } from "@/components/vader/footer"
@@ -34,19 +34,28 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="flex min-h-screen bg-background" data-testid="app-shell">
+    <div className="flex h-screen overflow-hidden bg-background" data-testid="app-shell">
+      {/* Fixed Sidebar */}
       <Sidebar />
-      <div className="flex flex-1 flex-col pl-[220px]">
+      
+      {/* Main Content Area */}
+      <div className="flex flex-1 flex-col ml-[220px] min-w-0">
         <Header />
-        <main className="flex-1 overflow-auto p-6" data-testid="main-content">
+        
+        {/* Scrollable Main Content */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-6" data-testid="main-content">
           {children}
         </main>
+        
         <Footer />
-        {/* Command Bar at bottom left */}
-        <div className="fixed bottom-4 left-[236px] z-50">
-          <CommandBar onOpen={() => setCommandOpen(true)} />
-        </div>
       </div>
+      
+      {/* Command Bar - Fixed at bottom left */}
+      <div className="fixed bottom-4 left-[236px] z-50">
+        <CommandBar onOpen={() => setCommandOpen(true)} />
+      </div>
+      
+      {/* Command Palette Modal */}
       <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
     </div>
   )

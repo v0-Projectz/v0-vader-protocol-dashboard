@@ -1,7 +1,6 @@
 "use client"
 
 import { ClientCard } from "@/components/vader/client-card"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 const columns = [
   {
@@ -85,48 +84,46 @@ const columns = [
 
 export function KanbanBoard() {
   return (
-    <div className="rounded-xl border border-border bg-card p-4" data-testid="kanban-board">
-      <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex gap-4">
-          {columns.map((column) => (
-            <div
-              key={column.id}
-              className="flex min-w-[240px] flex-col gap-3"
-              data-testid={`kanban-column-${column.id}`}
-            >
-              {/* Column Header */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      column.id === "prep" ? "bg-primary" : "bg-muted-foreground"
-                    }`}
-                  />
-                  <span className="text-sm font-medium text-foreground">
-                    {column.title}
-                  </span>
-                </div>
-                <span className="text-xs text-muted-foreground">
-                  {column.clients.length}
+    <div data-testid="kanban-board">
+      {/* Responsive grid - 5 columns on xl, 3 on lg, 2 on md, 1 on sm */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {columns.map((column) => (
+          <div
+            key={column.id}
+            className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4"
+            data-testid={`kanban-column-${column.id}`}
+          >
+            {/* Column Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    column.id === "prep" ? "bg-primary" : "bg-muted-foreground"
+                  }`}
+                />
+                <span className="text-sm font-medium text-foreground">
+                  {column.title}
                 </span>
               </div>
-
-              {/* Client Cards */}
-              <div className="flex flex-col gap-3">
-                {column.clients.map((client) => (
-                  <ClientCard key={client.initials} {...client} />
-                ))}
-                {column.clients.length === 0 && (
-                  <div className="flex h-32 items-center justify-center rounded-lg border border-dashed border-border">
-                    <span className="text-sm text-muted-foreground">No projects</span>
-                  </div>
-                )}
-              </div>
+              <span className="text-xs text-muted-foreground">
+                {column.clients.length}
+              </span>
             </div>
-          ))}
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+
+            {/* Client Cards */}
+            <div className="flex flex-col gap-3">
+              {column.clients.map((client) => (
+                <ClientCard key={client.initials} {...client} />
+              ))}
+              {column.clients.length === 0 && (
+                <div className="flex h-32 items-center justify-center rounded-lg border border-dashed border-border bg-secondary/30">
+                  <span className="text-sm text-muted-foreground">No projects</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

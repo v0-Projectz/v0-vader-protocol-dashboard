@@ -26,49 +26,49 @@ export function ClientCard({
   step,
   notification,
 }: ClientCardProps) {
-  const radius = 28
-  const strokeWidth = 4
+  const radius = 24
+  const strokeWidth = 3
   const normalizedRadius = radius - strokeWidth / 2
   const circumference = normalizedRadius * 2 * Math.PI
   const strokeDashoffset = circumference - (progress / 100) * circumference
 
   return (
     <div
-      className="relative flex flex-col gap-3 rounded-lg border border-border bg-card p-4"
+      className="relative flex flex-col gap-2.5 rounded-lg border border-border bg-[#1a1a1a] p-3"
       data-testid={`client-card-${initials.toLowerCase()}`}
     >
       {/* Header with Avatar and Progress */}
       <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <div className="relative">
-            <Avatar className="h-12 w-12 border-2 border-primary/30">
-              <AvatarFallback className="bg-primary/20 text-primary font-semibold">
+            <Avatar className="h-10 w-10 border-2 border-primary/30">
+              <AvatarFallback className="bg-primary/20 text-primary text-xs font-semibold">
                 {initials}
               </AvatarFallback>
             </Avatar>
             {notification && notification > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
                 {notification}
               </span>
             )}
           </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-semibold text-foreground truncate max-w-[100px]">
+          <div className="flex flex-col min-w-0">
+            <span className="text-sm font-semibold text-foreground truncate">
               {name}
             </span>
-            <span className="text-xs text-muted-foreground">{project}</span>
+            <span className="text-[10px] text-muted-foreground">{project}</span>
           </div>
         </div>
 
         {/* Progress Ring */}
-        <div className="relative h-14 w-14">
+        <div className="relative h-12 w-12 shrink-0">
           <svg
             className="h-full w-full -rotate-90"
             viewBox={`0 0 ${radius * 2} ${radius * 2}`}
           >
             <circle
               stroke="currentColor"
-              className="text-muted/30"
+              className="text-[#2a2a2a]"
               fill="transparent"
               strokeWidth={strokeWidth}
               r={normalizedRadius}
@@ -89,17 +89,17 @@ export function ClientCard({
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-sm font-bold text-primary">{progress}%</span>
+            <span className="text-xs font-bold text-primary">{progress}%</span>
           </div>
         </div>
       </div>
 
       {/* Status Badges */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <Badge
           variant="outline"
           className={cn(
-            "text-xs",
+            "text-[10px] px-1.5 py-0 h-5",
             status.paid
               ? "border-primary/50 bg-primary/10 text-primary"
               : "border-destructive/50 bg-destructive/10 text-destructive"
@@ -110,10 +110,10 @@ export function ClientCard({
         <Badge
           variant="outline"
           className={cn(
-            "text-xs",
+            "text-[10px] px-1.5 py-0 h-5",
             status.called
               ? "border-primary/50 bg-primary/10 text-primary"
-              : "border-muted-foreground/50 text-muted-foreground"
+              : "border-muted-foreground/50 bg-secondary/50 text-muted-foreground"
           )}
         >
           {status.called ? "Called" : "No Call"}
@@ -126,10 +126,10 @@ export function ClientCard({
           <div
             key={s}
             className={cn(
-              "flex h-6 w-6 items-center justify-center rounded text-xs font-medium transition-colors",
+              "flex h-5 w-5 items-center justify-center rounded text-[10px] font-medium transition-colors",
               s <= step
                 ? "bg-primary text-primary-foreground"
-                : "bg-muted text-muted-foreground"
+                : "bg-[#2a2a2a] text-muted-foreground"
             )}
           >
             {s}

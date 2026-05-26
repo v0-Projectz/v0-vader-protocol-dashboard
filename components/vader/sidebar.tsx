@@ -37,23 +37,21 @@ const operations = [
 
 export function Sidebar() {
   const pathname = usePathname()
-  const [operationsOpen, setOperationsOpen] = useState(
-    pathname.startsWith("/operations")
-  )
+  const [operationsOpen, setOperationsOpen] = useState(pathname.startsWith("/operations"))
 
   return (
     <aside
-      className="fixed left-0 top-0 z-40 flex h-screen w-[220px] flex-col border-r border-border bg-sidebar"
+      className="fixed left-0 top-0 z-40 flex h-screen w-[220px] flex-col border-r border-border bg-[#0a0a0a]"
       data-testid="sidebar"
     >
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-          <Cpu className="h-5 w-5 text-primary-foreground" />
+      <div className="flex h-14 items-center gap-3 border-b border-border px-4">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+          <Cpu className="h-4 w-4 text-primary-foreground" />
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-semibold text-primary">MSC</span>
-          <span className="text-xs text-muted-foreground">Media Pro</span>
+          <span className="text-[10px] text-muted-foreground">Media Pro</span>
         </div>
       </div>
 
@@ -68,8 +66,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-sidebar-accent text-primary"
-                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+                  ? "bg-[#1c1c1c] text-primary"
+                  : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
               )}
               data-testid={`nav-${item.name.toLowerCase()}`}
             >
@@ -85,8 +83,8 @@ export function Sidebar() {
             className={cn(
               "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               pathname.startsWith("/operations")
-                ? "bg-sidebar-accent text-primary"
-                : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+                ? "bg-[#1c1c1c] text-primary"
+                : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
             )}
             data-testid="nav-operations"
           >
@@ -101,7 +99,7 @@ export function Sidebar() {
               )}
             />
           </CollapsibleTrigger>
-          <CollapsibleContent className="pl-6 pt-1">
+          <CollapsibleContent className="pl-6 pt-1 space-y-1">
             {operations.map((item) => {
               const isActive = pathname === item.href
               return (
@@ -131,8 +129,8 @@ export function Sidebar() {
           className={cn(
             "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
             pathname === "/settings"
-              ? "bg-sidebar-accent text-primary"
-              : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+              ? "bg-[#1c1c1c] text-primary"
+              : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
           )}
           data-testid="nav-settings"
         >
