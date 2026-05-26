@@ -5,9 +5,11 @@ import { Sidebar } from "@/components/vader/sidebar"
 import { Header } from "@/components/vader/header"
 import { Footer } from "@/components/vader/footer"
 import { CommandPalette, CommandBar } from "@/components/vader/command-palette"
+import { cn } from "@/lib/utils"
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [commandOpen, setCommandOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true) // Collapsed by default
 
   // Handle keyboard shortcut for command palette
   useEffect(() => {
@@ -33,13 +35,23 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", down)
   }, [])
 
+  const sidebarWidth = sidebarCollapsed ? 60 : 220
+
   return (
     <div className="flex h-screen overflow-hidden bg-[#121212]" data-testid="app-shell">
-      {/* Fixed Sidebar */}
-      <Sidebar />
+      {/* Collapsible Sidebar */}
+      <Sidebar 
+        collapsed={sidebarCollapsed} 
+        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
+      />
       
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col ml-[220px] min-w-0">
+      <div 
+        className={cn(
+          "flex flex-1 flex-col min-w-0 transition-all duration-300"
+        )}
+        style={{ marginLeft: sidebarWidth }}
+      >
         <Header />
         
         {/* Scrollable Main Content */}
@@ -50,8 +62,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <Footer />
       </div>
       
-      {/* Command Bar - Fixed at bottom left */}
-      <div className="fixed bottom-3 left-[236px] z-50">
+      {/* Command Bar - Fixed at bottom left, adjusts for sidebar width */}
+      <div 
+        className="fixed bottom-3 z-50 transition-all duration-300"
+        style={{ left: sidebarWidth + 16 }}
+      >
         <CommandBar onOpen={() => setCommandOpen(true)} />
       </div>
       
