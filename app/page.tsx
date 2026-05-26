@@ -1,16 +1,26 @@
-export default function Home() {
+"use client"
+
+import { KanbanBoard } from "@/components/vader/kanban-board"
+import { MyTasks } from "@/components/vader/my-tasks"
+import { ActivityPulse } from "@/components/vader/activity-pulse"
+import { AssetStorage } from "@/components/vader/asset-storage"
+import { SupportTickets } from "@/components/vader/support-tickets"
+
+export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            Vader Engine
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
-      </main>
+    <div className="flex flex-col gap-6" data-testid="dashboard">
+      {/* Kanban Board - Full Width */}
+      <KanbanBoard />
+      
+      {/* My Tasks - Full Width */}
+      <MyTasks />
+      
+      {/* Bottom Bento Grid - 3 Columns */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <ActivityPulse />
+        <AssetStorage />
+        <SupportTickets />
+      </div>
     </div>
-  );
+  )
 }
