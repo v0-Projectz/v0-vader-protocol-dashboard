@@ -34,7 +34,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background" data-testid="app-shell">
+    <div className="flex h-screen overflow-hidden bg-[#121212]" data-testid="app-shell">
       {/* Fixed Sidebar */}
       <Sidebar />
       
@@ -43,7 +43,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <Header />
         
         {/* Scrollable Main Content */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden p-6" data-testid="main-content">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-4" data-testid="main-content">
           {children}
         </main>
         
@@ -51,7 +51,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
       
       {/* Command Bar - Fixed at bottom left */}
-      <div className="fixed bottom-4 left-[236px] z-50">
+      <div className="fixed bottom-3 left-[236px] z-50">
         <CommandBar onOpen={() => setCommandOpen(true)} />
       </div>
       

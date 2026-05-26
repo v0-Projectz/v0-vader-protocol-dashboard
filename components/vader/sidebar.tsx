@@ -12,7 +12,6 @@ import {
   Terminal,
   Settings,
   ChevronDown,
-  Cpu,
 } from "lucide-react"
 import {
   Collapsible,
@@ -41,17 +40,17 @@ export function Sidebar() {
 
   return (
     <aside
-      className="fixed left-0 top-0 z-40 flex h-screen w-[220px] flex-col border-r border-border bg-[#0a0a0a]"
+      className="fixed left-0 top-0 z-40 flex h-screen w-[220px] flex-col border-r border-[#2a2a2a] bg-[#0a0a0a]"
       data-testid="sidebar"
     >
       {/* Logo */}
-      <div className="flex h-14 items-center gap-3 border-b border-border px-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-          <Cpu className="h-4 w-4 text-primary-foreground" />
+      <div className="flex h-12 items-center gap-3 border-b border-[#2a2a2a] px-4">
+        <div className="flex h-7 w-7 items-center justify-center rounded bg-primary">
+          <span className="text-xs font-bold text-primary-foreground">V</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-sm font-semibold text-primary">MSC</span>
-          <span className="text-[10px] text-muted-foreground">Media Pro</span>
+          <span className="text-sm font-semibold tracking-tight">Vader Engine</span>
+          <span className="text-[10px] text-muted-foreground font-mono">v2.5.0</span>
         </div>
       </div>
 
@@ -66,7 +65,7 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-[#1c1c1c] text-primary"
+                  ? "bg-primary/10 text-primary border border-primary/20"
                   : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
               )}
               data-testid={`nav-${item.name.toLowerCase()}`}
@@ -83,7 +82,7 @@ export function Sidebar() {
             className={cn(
               "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               pathname.startsWith("/operations")
-                ? "bg-[#1c1c1c] text-primary"
+                ? "bg-primary/10 text-primary border border-primary/20"
                 : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
             )}
             data-testid="nav-operations"
@@ -107,7 +106,7 @@ export function Sidebar() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+                    "flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm transition-colors",
                     isActive
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
@@ -123,13 +122,13 @@ export function Sidebar() {
       </nav>
 
       {/* Settings */}
-      <div className="border-t border-border p-3">
+      <div className="border-t border-[#2a2a2a] p-3">
         <Link
           href="/settings"
           className={cn(
             "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
             pathname === "/settings"
-              ? "bg-[#1c1c1c] text-primary"
+              ? "bg-primary/10 text-primary border border-primary/20"
               : "text-muted-foreground hover:bg-[#1c1c1c] hover:text-foreground"
           )}
           data-testid="nav-settings"

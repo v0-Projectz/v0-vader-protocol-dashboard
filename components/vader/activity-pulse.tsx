@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 interface Activity {
   id: string
   title: string
-  user: string
+  project: string
   time: string
   type: "success" | "warning" | "info"
 }
@@ -14,29 +14,29 @@ interface Activity {
 const activities: Activity[] = [
   {
     id: "1",
-    title: "Theme Install completed",
-    user: "Keisha Williams",
+    title: "Build completed",
+    project: "boilerplate-v2",
     time: "2m ago",
     type: "success",
   },
   {
     id: "2",
-    title: "Deposit overdue",
-    user: "Marcus Johnson",
+    title: "Test suite failed",
+    project: "node-launcher",
     time: "15m ago",
     type: "warning",
   },
   {
     id: "3",
-    title: "Domain configured",
-    user: "Tyrone Mitchell",
+    title: "Deployed to production",
+    project: "vaderlabz-site",
     time: "1h ago",
     type: "success",
   },
   {
     id: "4",
-    title: "Client onboarded",
-    user: "Devon Carter",
+    title: "New sandbox created",
+    project: "ai-experiments",
     time: "2h ago",
     type: "info",
   },
@@ -45,17 +45,17 @@ const activities: Activity[] = [
 export function ActivityPulse() {
   return (
     <div
-      className="rounded-xl border border-border bg-card"
+      className="rounded-xl border border-[#2a2a2a] bg-[#1c1c1c]"
       data-testid="activity-pulse"
     >
       {/* Header */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+      <div className="flex items-center gap-2 border-b border-[#2a2a2a] px-4 py-3">
         <Clock className="h-4 w-4 text-primary" />
         <span className="text-sm font-semibold">Activity Pulse</span>
       </div>
 
       {/* Activity List */}
-      <div className="divide-y divide-border">
+      <div className="divide-y divide-[#2a2a2a]">
         {activities.map((activity) => (
           <div
             key={activity.id}
@@ -64,19 +64,19 @@ export function ActivityPulse() {
           >
             <span
               className={cn(
-                "mt-1.5 h-2 w-2 rounded-full",
+                "mt-1.5 h-2 w-2 rounded-full flex-shrink-0",
                 activity.type === "success" && "bg-primary",
                 activity.type === "warning" && "bg-warning",
                 activity.type === "info" && "bg-blue-500"
               )}
             />
-            <div className="flex flex-1 flex-col gap-0.5">
+            <div className="flex flex-1 flex-col gap-0.5 min-w-0">
               <span className="text-sm font-medium text-foreground">
                 {activity.title}
               </span>
               <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>{activity.user}</span>
-                <span>{activity.time}</span>
+                <span className="font-mono text-primary/70 truncate">{activity.project}</span>
+                <span className="flex-shrink-0 ml-2">{activity.time}</span>
               </div>
             </div>
           </div>
